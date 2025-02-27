@@ -4,7 +4,7 @@ import {version} from '../package.json';
 const program = new Command();
 
 program
-  .name('chat-cli')
+  .name('convollm')
   .description('Convert chat conversations to LLM-friendly JSON format')
   .version(version);
 

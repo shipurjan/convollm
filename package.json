@@ -1,10 +1,10 @@
 {
-  "name": "chat-cli",
+  "name": "convollm",
   "version": "0.0.1",
   "description": "CLI tool for converting chat formats",
   "main": "dist/index.js",
   "bin": {
-    "chat-cli": "./dist/index.js"
+    "convollm": "./dist/index.js"
   },
   "scripts": {
     "dev": "tsup src/index.ts --watch",
