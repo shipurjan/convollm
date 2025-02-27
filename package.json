@@ -1,0 +1,26 @@
+{
+  "name": "chat-cli",
+  "version": "0.0.1",
+  "description": "CLI tool for converting chat formats",
+  "main": "dist/index.js",
+  "bin": {
+    "chat-cli": "./dist/index.js"
+  },
+  "scripts": {
+    "dev": "tsup src/index.ts --watch",
+    "build": "tsup src/index.ts --format cjs --dts",
+    "start": "node dist/index.js"
+  },
+  "files": ["dist", "README.md", "LICENSE"],
+  "keywords": ["cli", "chat", "converter"],
+  "author": "Cyprian Zdebski <shipurjan@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "22.13.5",
+    "tsup": "8.4.0",
+    "typescript": "5.7.3"
+  },
+  "dependencies": {
+    "commander": "13.1.0"
+  }
+}
