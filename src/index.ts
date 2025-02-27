@@ -1,6 +1,6 @@
 import { Command } from "commander";
-import { version } from "../package.json";
-import { convertDiscord } from "./convert/discord/main";
+import { version } from "~/package.json";
+import { convertDiscord } from "@/programs/convert/discord/main";
 
 const program = new Command();
 
@@ -15,7 +15,10 @@ const convert = program
 
 convert
   .command("discord")
-  .requiredOption("-i, --input <path>", "Input file or directory")
+  .requiredOption(
+    "-i, --input <path>",
+    "Input file path to the .json file exported with DiscordChatExporter",
+  )
   .option("-o, --output <path>", "Output file path")
   .action(convertDiscord);
 

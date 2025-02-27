@@ -1,9 +1,9 @@
 import fs from "fs/promises";
 
-export async function isFile(pathToCheck: string): Promise<boolean> {
+export async function isDir(pathToCheck: string): Promise<boolean> {
   try {
     const stats = await fs.stat(pathToCheck);
-    return stats.isFile();
+    return stats.isDirectory();
   } catch {
     return false;
   }
