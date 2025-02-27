@@ -17,33 +17,28 @@ export async function convertTelegram({
 }: IOptions) {
   const { inputPath, outputPath } = resolveInputOutputPaths(input, output);
 
-  try {
-    // Read the JSON file contents
-    const jsonData = await readJsonFile(inputPath);
+  // Read the JSON file contents
+  const jsonData = await readJsonFile(inputPath);
 
-    if (jsonData === null) {
-      throw new Error(`Failed to read or parse JSON file at ${inputPath}`);
-    }
-
-    // Log some basic info about the chat
-    console.log(`Chat name: ${jsonData.name}`);
-    console.log(`Total messages: ${jsonData.messages?.length || 0}`);
-
-    // Transform the data with our permissive approach
-    const transformedData = transformTelegramData(jsonData, mediaFolder);
-
-    // Write the transformed data to the output file
-    await fs.writeFile(outputPath, JSON.stringify(transformedData, null, 2));
-
-    console.log(
-      `Successfully converted Telegram data from ${inputPath} to ${outputPath}`,
-    );
-
-    return transformedData;
-  } catch (error) {
-    console.error("Error converting Telegram data:", error.message);
-    throw error;
+  if (jsonData === null) {
+    throw new Error(`Failed to read or parse JSON file at ${inputPath}`);
   }
+
+  // Log some basic info about the chat
+  console.log(`Chat name: ${jsonData.name}`);
+  console.log(`Total messages: ${jsonData.messages?.length || 0}`);
+
+  // Transform the data with our permissive approach
+  const transformedData = transformTelegramData(jsonData, mediaFolder);
+
+  // Write the transformed data to the output file
+  await fs.writeFile(outputPath, JSON.stringify(transformedData, null, 2));
+
+  console.log(
+    `Successfully converted Telegram data from ${inputPath} to ${outputPath}`,
+  );
+
+  return transformedData;
 }
 
 /**
