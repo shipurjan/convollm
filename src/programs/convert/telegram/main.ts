@@ -37,8 +37,6 @@ export async function convertTelegram({
   console.log(
     `Successfully converted Telegram data from ${inputPath} to ${outputPath}`,
   );
-
-  return transformedData;
 }
 
 /**
