@@ -63,9 +63,22 @@ function transformDiscordData(
     const embed =
       message.embeds.length > 0 ? message.embeds[0].title : undefined;
 
+    const timestamp = new Date(message.timestamp);
+    const formattedDate =
+      timestamp.getDate().toString().padStart(2, "0") +
+      "-" +
+      timestamp.toLocaleString("en-US", { month: "short" }) +
+      "-" +
+      timestamp.getFullYear() +
+      " " +
+      timestamp.getHours().toString().padStart(2, "0") +
+      ":" +
+      timestamp.getMinutes().toString().padStart(2, "0");
+
     // Basic message object
     const outputMessage: z.infer<typeof DiscordSchema.OutputMessage> = {
       id: messageId,
+      date: formattedDate,
       role,
       name: message.author.name,
       content: message.content,

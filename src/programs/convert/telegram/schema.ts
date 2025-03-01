@@ -66,6 +66,7 @@ export class TelegramSchema {
     role: z.string(),
     name: z.string(),
     content: z.string(),
+    date: z.string(), // Added date field
     reaction: z.string().optional(),
     embed: z.string().optional(),
     repliedTo: z.string().optional(),

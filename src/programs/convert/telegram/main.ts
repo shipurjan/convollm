@@ -119,9 +119,39 @@ function transformTelegramData(
       }
     }
 
+    let formattedDate = "";
+    try {
+      // For Telegram, we might need to check if we're dealing with a date string or a timestamp
+      const dateValue = message.date;
+      let messageDate;
+
+      if (message.date_unixtime) {
+        // If unix timestamp is available, it's more reliable
+        messageDate = new Date(parseInt(message.date_unixtime) * 1000);
+      } else {
+        // Otherwise try to parse the date string
+        messageDate = new Date(dateValue);
+      }
+
+      formattedDate =
+        messageDate.getDate().toString().padStart(2, "0") +
+        "-" +
+        messageDate.toLocaleString("en-US", { month: "short" }) +
+        "-" +
+        messageDate.getFullYear() +
+        " " +
+        messageDate.getHours().toString().padStart(2, "0") +
+        ":" +
+        messageDate.getMinutes().toString().padStart(2, "0");
+    } catch (e) {
+      // Fallback if date parsing fails
+      formattedDate = "Unknown Date";
+    }
+
     // Basic message object
     const outputMessage: z.infer<typeof TelegramSchema.OutputMessage> = {
       id: messageId,
+      date: formattedDate,
       role,
       name: fromName,
       content,
