@@ -77,5 +77,3 @@ export class TelegramSchema {
 
   static OutputData = z.array(this.OutputMessage);
 }
-
-export default TelegramSchema;

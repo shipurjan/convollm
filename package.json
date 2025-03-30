@@ -1,8 +1,9 @@
 {
   "name": "convollm",
   "version": "0.0.4",
-  "description": "CLI tool for converting chat formats",
+  "description": "CLI tool and module for converting chat formats",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "convollm": "./dist/index.js"
   },
@@ -19,7 +20,10 @@
   "keywords": [
     "cli",
     "chat",
-    "converter"
+    "converter",
+    "llm",
+    "discord",
+    "telegram"
   ],
   "author": "Cyprian Zdebski <shipurjan@gmail.com>",
   "license": "MIT",

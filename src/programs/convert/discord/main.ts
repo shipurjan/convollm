@@ -1,15 +1,18 @@
 import { readJsonFile } from "@/lib/utils/readJsonFile";
-import path from "node:path";
 import { z } from "zod";
 import fs from "fs/promises";
 import { DiscordSchema } from "./schema";
+import { resolveInputOutputPaths } from "@/lib/utils/resolveInputOutputPaths";
 
-interface IOptions {
+export interface IConvertDiscordOptions {
   input: string;
   output?: string;
 }
 
-export async function convertDiscord({ input, output }: IOptions) {
+export async function convertDiscord({
+  input,
+  output,
+}: IConvertDiscordOptions) {
   const { inputPath, outputPath } = resolveInputOutputPaths(input, output);
 
   // Read the JSON file contents
@@ -33,7 +36,7 @@ export async function convertDiscord({ input, output }: IOptions) {
   );
 }
 
-function transformDiscordData(
+export function transformDiscordData(
   data: z.infer<typeof DiscordSchema.InputData>,
 ): z.infer<typeof DiscordSchema.OutputData> {
   // Map to track unique users and their roles
@@ -113,33 +116,4 @@ function transformDiscordData(
   });
 
   return messagesWithRefs;
-}
-
-function validateJsonPath(
-  filePath: string,
-  fileType: "Input" | "Output",
-): void {
-  if (!filePath.toLowerCase().endsWith(".json")) {
-    throw new Error(
-      `${fileType} file must be a JSON file (with .json extension)`,
-    );
-  }
-}
-
-function resolveInputOutputPaths(
-  input: string,
-  output?: string,
-): { inputPath: string; outputPath: string } {
-  const inputPath = path.resolve(input);
-  validateJsonPath(inputPath, "Input");
-
-  const outputPath = output
-    ? path.resolve(output)
-    : path.join(
-        path.dirname(input),
-        path.basename(input, ".json") + ".out.json",
-      );
-  validateJsonPath(outputPath, "Output");
-
-  return { inputPath, outputPath };
 }

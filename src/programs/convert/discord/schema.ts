@@ -95,6 +95,3 @@ export class DiscordSchema {
 
   static OutputData = z.array(this.OutputMessage);
 }
-
-// Export the class
-export default DiscordSchema;
