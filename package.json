@@ -1,6 +1,6 @@
 {
   "name": "convollm",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "CLI tool and module for converting chat formats",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
