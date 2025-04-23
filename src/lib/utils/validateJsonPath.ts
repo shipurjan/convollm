@@ -1,4 +1,3 @@
-
 export function validateJsonPath(
   filePath: string,
   fileType: "Input" | "Output",
