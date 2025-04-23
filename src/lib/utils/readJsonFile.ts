@@ -1,10 +1,8 @@
-import fs from "fs/promises";
-import { readFile } from "./readFile";
+import { parseJsonFile } from "./parseJsonFile";
 
 export async function readJsonFile(filePath: string) {
   try {
-  const content = await readFile(filePath)
-  return content ? JSON.parse(content) : null;
+    return parseJsonFile(filePath);
   } catch {
     throw new Error("Error reading JSON file");
   }
