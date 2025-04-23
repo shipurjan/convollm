@@ -5,15 +5,17 @@ A command-line tool for converting chat conversations from various platforms to 
 ## Installation
 
 ```bash
-npm install -g convollm
+npm i -g convollm
 ```
 
 ## Features
 
 - Convert Discord chat exports to standardized JSON
 - Convert Telegram chat exports to standardized JSON
+- Convert Instagram chat exports to standardized JSON
 - Preserves message references, reactions, and timestamps
 - Consistent role assignment for speakers
+- Intelligent filtering of notification messages
 
 ## Usage
 
@@ -33,6 +35,14 @@ Convert Telegram chat logs exported from Telegram Desktop:
 convollm convert telegram -i path/to/telegram-export.json -o output.json
 ```
 
+### Instagram Conversion
+
+Convert Instagram chat logs from your Instagram data export:
+
+```bash
+convollm convert instagram -i path/to/message_1.json -o output.json
+```
+
 ## Output Format
 
 The tool generates a standardized JSON format with the following structure:
@@ -47,25 +57,38 @@ The tool generates a standardized JSON format with the following structure:
     "content": "Message content here",
     "reaction": "👍",
     "repliedTo": "msg-000000"
-  },
+  }
   // More messages...
 ]
 ```
 
 ### Output Fields
 
-| Field     | Description                                            |
-|-----------|--------------------------------------------------------|
-| id        | Unique message identifier                              |
-| date      | Formatted message timestamp (DD-MMM-YYYY HH:MM)        |
-| role      | Consistent speaker role (speaker1, speaker2, etc.)     |
-| name      | Original username from the chat                        |
-| content   | Message text content                                   |
-| reaction  | Optional emoji reaction (if present)                   |
-| repliedTo | Optional reference to replied message ID (if present)  |
-| embed     | Optional embed title (Discord only, if present)        |
-| mediaPath | Optional path to media file (Telegram only, if present)|
-| mediaType | Optional media type (Telegram only, if present)        |
+| Field     | Description                                               |
+| --------- | --------------------------------------------------------- |
+| id        | Unique message identifier                                 |
+| date      | Formatted message timestamp (DD-MMM-YYYY HH:MM)           |
+| role      | Consistent speaker role (speaker1, speaker2, etc.)        |
+| name      | Original username from the chat                           |
+| content   | Message text content                                      |
+| reaction  | Optional emoji reaction (if present)                      |
+| repliedTo | Optional reference to replied message ID (if present)     |
+| embed     | Optional embed title (Discord only, if present)           |
+| mediaPath | Optional path to media file (Telegram only, if present)   |
+| mediaType | Optional media type (for messages with media)             |
+| shareLink | Optional shared link URL (Instagram only, if present)     |
+| shareText | Optional shared content text (Instagram only, if present) |
+
+## Platform-Specific Features
+
+### Instagram Conversion
+
+The Instagram converter includes:
+
+- Preservation of Unicode characters and emojis
+- Automatic filtering of reaction notification messages
+- Support for photos and shared content
+- Reversal of message order (Instagram exports newest-first)
 
 ## Development
 
